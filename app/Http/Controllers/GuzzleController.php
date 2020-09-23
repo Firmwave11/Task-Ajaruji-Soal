@@ -5,6 +5,8 @@ use GuzzleHttp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 
 
 class GuzzleController extends Controller
@@ -15,6 +17,7 @@ class GuzzleController extends Controller
         $tryOutArray = Http::get('http://ajaruji-demo-alpha.demo.klik.digital/demo/to')
         ->json()['data'];
         $page = 1;
+
         return view('mapel',[
         'mataPelajaran' => $mataPelajaran,
         'page'          => $page,
@@ -47,19 +50,24 @@ class GuzzleController extends Controller
         ->json()['data'];
         $data= $request->matapelajaran;
         $idsoal= $request->soal;
-        $benar = 0;
-        $salah = 0;
-        if($request->hasil == 'jawaban anda benar'){
-            $benar = $benar + 1;
+        Cookie::queue('benar', 0, 70);
+        Cookie::queue('salah', 0, 70);
+        $benar=Cookie::get('benar');
+        $salah=Cookie::get('salah');
+        if($request->hasil == 1){
+            $benar++;
+        }else{
+            $salah++; 
         }
+     
         $output ='<ul class="pagination">';
         if($page == 1){ // Jika page adalah page ke 1, maka disable link PREV
             $output .= '<li class="disabled"><a href="#">First</a></li>';
             $output .= '<li class="disabled"><a href="#">&laquo;</a></li>';
             }else{ // Jika page bukan page ke 1
               $link_prev = ($page > 1)? $page - 1 : 1;
-              $output .= '<li><a href="1?matapelajaran='.$data.'&soal='.$idsoal.'&_token=Yx5wKvg0bKMrpvZNHPhIrM3YWqdd67cAiWokzprc">First</a></li>';
-              $output .= '<li><a href="'.$link_prev.'?matapelajaran='.$data.'&soal='.$idsoal.'&_token=Yx5wKvg0bKMrpvZNHPhIrM3YWqdd67cAiWokzprc">&laquo;</a></li>';
+              $output .= '<li><a href="1?matapelajaran='.$data.'&soal='.$idsoal.'">First</a></li>';
+              $output .= '<li><a href="'.$link_prev.'?matapelajaran='.$data.'&soal='.$idsoal.'">&laquo;</a></li>';
             }
         $total_pages = count($soal1['soal']);
         $jumlah_number = 5; // Tentukan jumlah link number sebelum dan sesudah page yang aktif
@@ -74,23 +82,23 @@ class GuzzleController extends Controller
         for($i=$start_number; $i<=$end_number; $i++)  
         {  
             $link_active = ($page == $i)? ' class="active"' : ''; 
-             $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'&_token=Yx5wKvg0bKMrpvZNHPhIrM3YWqdd67cAiWokzprc" value ="'.$i.'">'.$i.'</a></li>';  
+             $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';  
         } 
         if($page == $total_pages){
             $output .='<li class="disabled"><a href="#">&raquo;</a></li>';
             $output .='<li class="disabled"><a href="#">Last</a></li>';
         }else{ // Jika Bukan page terakhir
             $link_next = ($page < $total_pages)? $page + 1 : $total_pages;
-            $output .='<li><a href="'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'&_token=Yx5wKvg0bKMrpvZNHPhIrM3YWqdd67cAiWokzprc">&raquo;</a></li>';
-            $output .='<li><a href="'.$total_pages.'?matapelajaran='.$data.'&soal='.$idsoal.'&_token=Yx5wKvg0bKMrpvZNHPhIrM3YWqdd67cAiWokzprc">Last</a></li>';
+            $output .='<li><a href="'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'">&raquo;</a></li>';
+            $output .='<li><a href="'.$total_pages.'?matapelajaran='.$data.'&soal='.$idsoal.'">Last</a></li>';
         }
         $output .= '</ul>';
         $link_next = ($page < $total_pages)? $page + 1 : $total_pages;
-        $lanjut ='<a href="'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'&_token=Yx5wKvg0bKMrpvZNHPhIrM3YWqdd67cAiWokzprc">lanjut</a>';
+        $lanjut ='<a name="lanjut" href="'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'">lanjut</a>';
         return view('soal',[
+            'salah' => $salah,
+            'benar' => $benar,
             'lanjut' =>$lanjut,
-            'benar' =>$benar,
-            'salah' =>$salah,
             'output' => $output,
             'soal' => $soal,
             'data' => $data,
@@ -106,14 +114,21 @@ class GuzzleController extends Controller
         $soal = $responsejson->data->soal;
         $soal1 = $soal[0]->answer;
         $count= count($soal1);
-
-        $jawab = '<span name="hasil"id="res_message" value="jawaban anda salah">jawaban anda salah</span>';
+        $jawab = '<span name="hasil" id="res_message" value="0">jawaban anda salah</span>';
         for($i = 0; $i <$count; $i++){
             $hasil = $soal1[$i]->content;
             $hasil2 = $soal1[$i]->status;
             if ($request->jawaban == $hasil && $hasil2 == 1){
-                $jawab = '<span name="hasil"id="res_message" value="jawaban anda benar">jawaban anda benar</span>';
-                }
+                $jawab = '<span name="hasil" id="res_message" value="1">jawaban anda benar</span>';
+
+            }
+            }
+            $benar=Cookie::get('benar');
+            $salah=Cookie::get('salah');
+            if($request->hasil == 1){
+                $benar++;
+            }else{
+                $salah++; 
             }
             return $jawab;
                
@@ -128,11 +143,15 @@ class GuzzleController extends Controller
             ->json()['data'];
             $total_pages = count($soal1['soal']);
             $link_next = ($page < $total_pages)? $page + 1 : $total_pages;
-            $lanjut ='<a href="http://127.0.0.1:8000/soal/'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'&_token=Yx5wKvg0bKMrpvZNHPhIrM3YWqdd67cAiWokzprc">lanjut</a>';
+            $lanjut ='<a href="http://127.0.0.1:8000/soal/'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'">lanjut</a>';
             return view('jelas',[
                 'lanjut' => $lanjut,
                 'penjelasan' => $penjelasan,
                   ]);
             }
+    public function hasil(){
+
+            
+        }
             
 }

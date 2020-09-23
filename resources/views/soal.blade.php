@@ -13,11 +13,11 @@
             <p>{{$page}}.{!!$datas['content']!!}</p>
 			@foreach($datas['answer'] as $answer)
 				<label for="jawaban">
-                    <input type="radio" id="jawaban" name="jawaban" value="{{$answer['content']}}" required="required">{!!$answer['content']!!}
+                    <input class="jawaban" type="radio" id="jawaban" name="jawaban" value="{{$answer['content']}}" required="required">{!!$answer['content']!!}
                 </label></br>
 			@endforeach 
 		@endforeach
-          <button type="submit" name="jawab" id="jawab" class="btn btn-success" data-target="#ModalJawab" data-toggle="modal" value="jawab">Periksa</button>
+          <button type="submit" name="jawab" id="jawab" class="btn btn-success" data-target="#ModalJawab" data-backdrop="static" disabled="disabled" data-toggle="modal" value="jawab">Periksa</button>
 			</form>
                <div id="ModalJawab" class="modal fade" tabindex="-1" role="dialog">
 			<div class="modal-dialog">
@@ -44,6 +44,8 @@
 @endsection
 <script type="text/javascript">
 $(document).ready(function(){
+    $('.jawaban').change(function(){
+    $('#jawab').removeAttr('disabled');});
     $("#jawab").click(function(e){
 		e.preventDefault();
 		$.ajaxSetup({
