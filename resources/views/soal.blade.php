@@ -6,7 +6,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<strong>Soal</strong>
-			<strong><br>Mata Pelajaran : {{$soal['mata_pelajaran']}}{{$benar}}{{$salah}}</br></strong>
+			<strong><br>Mata Pelajaran : {{$soal['mata_pelajaran']}}</br></strong>
 		</div>
             <form name="" id="soal" method="post">
 		 @foreach ($soal['soal'] as $datas)
