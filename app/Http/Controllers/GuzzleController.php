@@ -135,12 +135,76 @@ class GuzzleController extends Controller
         $nilai48=$request->session()->get('pertanyaan48');
         $nilai49=$request->session()->get('pertanyaan49');
         $nilai50=$request->session()->get('pertanyaan50');
+        $nilai1s=$request->session()->get('pertanyaan1s');
+        $nilai2s=$request->session()->get('pertanyaan2s');
+        $nilai3s=$request->session()->get('pertanyaan3s');
+        $nilai4s=$request->session()->get('pertanyaan4s');
+        $nilai5s=$request->session()->get('pertanyaan5s');
+        $nilai6s=$request->session()->get('pertanyaan6s');
+        $nilai7s=$request->session()->get('pertanyaan7s');
+        $nilai8s=$request->session()->get('pertanyaan8s');
+        $nilai9s=$request->session()->get('pertanyaan9s');
+        $nilai10s=$request->session()->get('pertanyaan10s');
+        $nilai11s=$request->session()->get('pertanyaan11s');
+        $nilai12s=$request->session()->get('pertanyaan12s');
+        $nilai13s=$request->session()->get('pertanyaan13s');
+        $nilai14s=$request->session()->get('pertanyaan14s');
+        $nilai15s=$request->session()->get('pertanyaan15s');
+        $nilai16s=$request->session()->get('pertanyaan16s');
+        $nilai17s=$request->session()->get('pertanyaan17s');
+        $nilai18s=$request->session()->get('pertanyaan18s');
+        $nilai19s=$request->session()->get('pertanyaan19s');
+        $nilai20s=$request->session()->get('pertanyaan20s');
+        $nilai21s=$request->session()->get('pertanyaan21s');
+        $nilai22s=$request->session()->get('pertanyaan22s');
+        $nilai23s=$request->session()->get('pertanyaan23s');
+        $nilai24s=$request->session()->get('pertanyaan24s');
+        $nilai25s=$request->session()->get('pertanyaan25s');
+        $nilai26s=$request->session()->get('pertanyaan26s');
+        $nilai27s=$request->session()->get('pertanyaan27s');
+        $nilai28s=$request->session()->get('pertanyaan28s');
+        $nilai29s=$request->session()->get('pertanyaan29s');
+        $nilai30s=$request->session()->get('pertanyaan30s');
+        $nilai31s=$request->session()->get('pertanyaan31s');
+        $nilai32s=$request->session()->get('pertanyaan32s');
+        $nilai33s=$request->session()->get('pertanyaan33s');
+        $nilai34s=$request->session()->get('pertanyaan34s');
+        $nilai35s=$request->session()->get('pertanyaan35s');
+        $nilai36s=$request->session()->get('pertanyaan36s');
+        $nilai37s=$request->session()->get('pertanyaan37s');
+        $nilai38s=$request->session()->get('pertanyaan38s');
+        $nilai39s=$request->session()->get('pertanyaan39s');
+        $nilai40s=$request->session()->get('pertanyaan40s');
+        $nilai41s=$request->session()->get('pertanyaan41s');
+        $nilai42s=$request->session()->get('pertanyaan42s');
+        $nilai43s=$request->session()->get('pertanyaan43s');
+        $nilai44s=$request->session()->get('pertanyaan44s');
+        $nilai45s=$request->session()->get('pertanyaan45s');
+        $nilai46s=$request->session()->get('pertanyaan46s');
+        $nilai47s=$request->session()->get('pertanyaan47s');
+        $nilai48s=$request->session()->get('pertanyaan48s');
+        $nilai49s=$request->session()->get('pertanyaan49s');
+        $nilai50s=$request->session()->get('pertanyaan50s');
         $hasil= $nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5 + $nilai6 + $nilai7 + $nilai8 + $nilai9 + $nilai10 + $nilai11 + $nilai12 + $nilai13 + $nilai14 + $nilai15 + $nilai16 + $nilai17 +
         $nilai18 + $nilai19 + $nilai20 + $nilai21 + $nilai22 + $nilai23 + $nilai24 + $nilai25 + $nilai26 + $nilai27 + $nilai28 + $nilai29 + $nilai30 + $nilai31 + $nilai32 + $nilai33 + $nilai34 + $nilai35 +
         $nilai36 + $nilai37 + $nilai38 + $nilai39 + $nilai40 + $nilai41 + $nilai42 + $nilai43 + $nilai44 + $nilai45 + $nilai46 + $nilai47 + $nilai48 + $nilai49 + $nilai50;
+        $hasils= $nilai1s + $nilai2s + $nilai3s + $nilai4s + $nilai5s + $nilai6s + $nilai7s + $nilai8s + $nilai9s + $nilai10s + $nilai11s + $nilai12s + $nilai13s + $nilai14s + $nilai15s + $nilai16s + $nilai17s +
+        $nilai18s + $nilai19s + $nilai20s + $nilai21s + $nilai22s + $nilai23s + $nilai24s + $nilai25s + $nilai26s + $nilai27s + $nilai28s + $nilai29s + $nilai30s + $nilai31s + $nilai32s + $nilai33s + $nilai34s + $nilai35s +
+        $nilai36s + $nilai37s + $nilai38s + $nilai39s + $nilai40s + $nilai41s + $nilai42s + $nilai43s + $nilai44s + $nilai45s + $nilai46 + $nilai47s + $nilai48s + $nilai49s + $nilai50s;
         $link_next = ($page < $total_pages)? $page + 1 : $total_pages;
-        $lanjut ='<a href="'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'">lanjut</a>';
+        if($page==$total_pages){
+            $lanjut ='<a href="1?matapelajaran='.$data.'&soal='.$idsoal.'">lanjut</a>';
+            if( $hasils == $total_pages){
+                $lanjut ='<a href="'.route('hasil', [$data,$idsoal,$page]).'">hasil</a>';
+            }
+        }
+        else{
+            $lanjut ='<a href="'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'">lanjut</a>';
+        }
+
         return view('soal',[
+            'hasils' => $hasils,
+            'hasil' => $hasil,
             'lanjut' =>$lanjut,
             'output' => $output,
             'soal' => $soal,
@@ -153,11 +217,271 @@ class GuzzleController extends Controller
     public function jawab(Request $request,$data,$idsoal,$page) {
         $response = Http::get('ajaruji-demo-alpha.demo.klik.digital/demo/quiz?mapel='.$data.'&id='.$idsoal.'&no_urut='.$page)
         ;
+        $soal1 = Http::get('ajaruji-demo-alpha.demo.klik.digital/demo/quiz?mapel='.$data.'&id='.$idsoal)
+        ->json()['data'];
+        $total_pages = count($soal1['soal']);
         $responsejson = json_decode($response->getBody());
         $soal = $responsejson->data->soal;
         $soal1 = $soal[0]->answer;
         $count= count($soal1);
         $jawaban= $request->jawaban;
+        if(isset($request->jawaban)){
+        switch($page){
+            case 1:
+                $value1s = 0;
+            $value1s++;
+            $request->session()->put('pertanyaan1s', $value1s);
+            break;                    
+            case 2:
+                $value2s = 0;
+            $value2s++;
+            $request->session()->put('pertanyaan2s', $value2s);
+            break;
+            case 3:
+                $value3s = 0;
+            $value3s++;
+            $request->session()->put('pertanyaan3s', $value3s);
+            break;
+            case 4:
+            $value4s = 0;
+            $value4s++;
+            $request->session()->put('pertanyaan4s', $value4s);
+            break;
+            case 5:
+                $value5s = 0;
+            $value5s++;
+            $request->session()->put('pertanyaan5s', $value5s);
+
+            break;
+            case 6:
+                $value6s = 0;
+            $value6s++;
+            $request->session()->put('pertanyaan6s', $value6s);
+
+            break;                    
+            case 7:
+                $value7s = 0;
+            $value7s++;
+            $request->session()->put('pertanyaan7s', $value7s);
+            break;
+            case 8:
+                $value8s = 0;
+            $value8s++;
+            $request->session()->put('pertanyaan8s', $value8s);
+            break;                                        
+            case 9:
+                $value9s = 0;
+            $value9s++;
+            $request->session()->put('pertanyaan9s', $value9s);
+            break;
+            case 10:
+                $value10s = 0;
+            $value10s++;
+            $request->session()->put('pertanyaan10s', $value10s);
+            break;
+            case 11:
+                $value11s = 0;
+            $value11s++;
+            $request->session()->put('pertanyaan11s', $value11s);
+
+            break;
+            case 12:
+                $value12s = 0;
+            $value12s++;
+            $request->session()->put('pertanyaan12s', $value12s);
+            break;
+            case 13:
+                $value13s = 0;
+            $value13s++;
+            $request->session()->put('pertanyaan13s', $value13s);
+            break;
+            case 14:
+                $value14s = 0;
+            $value14s++;
+            $request->session()->put('pertanyaan14s', $value14s);
+            break;
+            case 15:
+                $value15s = 0;
+            $value15s++;
+            $request->session()->put('pertanyaan15s', $value15s);
+            break;
+            case 16:
+                $value16s = 0;
+            $value16s++;
+            $request->session()->put('pertanyaan16s', $value16s);
+            break;
+            case 17:
+                $value17s = 0;
+            $value17s++;
+            $request->session()->put('pertanyaan17s', $value17s);
+            break;
+            case 18:
+                $value18s = 0;
+            $value18s++;
+            $request->session()->put('pertanyaan18s', $value18s);
+            break;
+            case 19:
+                $value19s = 0;
+            $value19s++;
+            $request->session()->put('pertanyaan19s', $value19s);
+            break;
+            case 20:
+                $value20s = 0;
+            $value20s++;
+            $request->session()->put('pertanyaan20s', $value20s);
+            break;
+            case 21:
+                $value21s = 0;
+            $value21s++;
+            $request->session()->put('pertanyaan21s', $value21s);
+            break;
+            case 22:
+                $value22s = 0;
+            $value22s++;
+            $request->session()->put('pertanyaan22s', $value22s);
+            break;
+            case 23:
+                $value23s = 0;
+            $value23s++;
+            $request->session()->put('pertanyaan23s', $value23s);
+            break;
+            case 24:
+                $value24s = 0;
+            $value24s++;
+            $request->session()->put('pertanyaan24s', $value24s);
+            break;
+            case 25:
+                $value25s = 0;
+            $value25s++;
+            $request->session()->put('pertanyaan25s', $value25s);
+            break;
+            case 26:
+                $value26s = 0;
+            $value26s++;
+            $request->session()->put('pertanyaan26s', $value26s);
+            break;
+            case 27:
+                $value27s = 0;
+            $value27s++;
+            $request->session()->put('pertanyaan27s', $value27s);
+            break;
+            case 28:
+                $value28s = 0;
+            $value28s++;
+            $request->session()->put('pertanyaan28s', $value28s);
+            break;
+            case 29:
+                $value29s = 0;
+            $value29s++;
+            $request->session()->put('pertanyaan29s', $value29s);
+            break;
+            case 30:
+                $value30s = 0;
+            $value30s++;
+            $request->session()->put('pertanyaan30s', $value30s);
+            break;
+            case 31:
+                $value31s = 0;
+            $value31s++;
+            $request->session()->put('pertanyaan31s', $value31s);
+            break;
+            case 32:
+                $value32s = 0;
+            $value32s++;
+            $request->session()->put('pertanyaan32s', $value32s);
+            break;
+            case 33:
+                $value33s = 0;
+            $value33s++;
+            $request->session()->put('pertanyaan33s', $value33s);
+            break;
+            case 34:
+                $value34s = 0;
+            $value34s++;
+            $request->session()->put('pertanyaan34s', $value34s);
+            break;
+            case 35:
+                $value35s = 0;
+            $value35s++;
+            $request->session()->put('pertanyaan35s', $value35s);
+            break;
+            case 36:
+                $value36s = 0;
+            $value36s++;
+            $request->session()->put('pertanyaan36s', $value36s);
+            break;
+            case 37:
+                $value37s = 0;
+            $value37s++;
+            $request->session()->put('pertanyaan37s', $value37s);
+            break;
+            case 38:
+                $value38s = 0;
+            $value38s++;
+            $request->session()->put('pertanyaan38s', $value38s);
+            break;
+            case 39:
+                $value39s = 0;
+            $value39s++;
+            $request->session()->put('pertanyaan39s', $value39s);
+            break;
+            case 40:
+                $value40s = 0;
+            $value40s++;
+            $request->session()->put('pertanyaan40s', $value40s);
+            break;
+            case 41:
+                $value41s = 0;
+            $value41s++;
+            $request->session()->put('pertanyaan41s', $value41s);
+            break;
+            case 42:
+                $value42s = 0;
+            $value42s++;
+            $request->session()->put('pertanyaan42s', $value42s);
+            break;
+            case 43:
+                $value43s = 0;
+            $value43s++;
+            $request->session()->put('pertanyaan43s', $value43s);
+            break;
+            case 44:
+                $value44s = 0;
+            $value44s++;
+            $request->session()->put('pertanyaan44s', $value44s);
+            break;
+            case 45:
+                $value45s = 0;
+            $value45s++;
+            $request->session()->put('pertanyaan45s', $value45s);
+            break;
+            case 46:
+                $value46s = 0;
+            $value46s++;
+            $request->session()->put('pertanyaan46s', $value46s);
+            break;
+            case 47:
+                $value47s = 0;
+            $value47s++;
+            $request->session()->put('pertanyaan47s', $value47s);
+            break;
+            case 48:
+                $value48s = 0;
+            $value48s++;
+            $request->session()->put('pertanyaan48s', $value48s);
+            break;
+            case 49:
+                $value49s = 0;
+            $value49s++;
+            $request->session()->put('pertanyaan49s', $value49s);
+            break;
+            case 50:
+                $value50s = 0;
+            $value50s++;
+            $request->session()->put('pertanyaan50s', $value50s);
+            break;
+        }
+    }
         $jawab = '<span name="hasil" id="res_message" value="0">jawaban anda salah</span>';
         for($i = 0; $i <$count; $i++){
             $hasil = $soal1[$i]->content;
@@ -439,6 +763,133 @@ class GuzzleController extends Controller
             return view('jelas',[
                 'penjelasan' => $penjelasan,
                 'lanjut' => $lanjut,
+                ]);
+            }
+        public function hasil(Request $request,$data,$idsoal,$page) {
+            //dd($this->baseurl.'to?id_mapel='.$request->matapelajaran);
+            //$res = Http::get('http://ajaruji-demo-alpha.demo.klik.digital/demo/to?id_mapel='.$request->matapelajaran);
+            //$responsejson = json_decode($res->getBody());
+            $penjelasan = Http::get('ajaruji-demo-alpha.demo.klik.digital/demo/quiz?mapel='.$data.'&id='.$idsoal.'&no_urut='.$page)
+            ->json()['data']['soal'][0]['explain'];
+            $soal1 = Http::get('ajaruji-demo-alpha.demo.klik.digital/demo/quiz?mapel='.$data.'&id='.$idsoal)
+            ->json()['data'];
+            $total_pages = count($soal1['soal']);
+            $nilai1=$request->session()->get('pertanyaan1');
+            $nilai2=$request->session()->get('pertanyaan2');
+            $nilai3=$request->session()->get('pertanyaan3');
+            $nilai4=$request->session()->get('pertanyaan4');
+            $nilai5=$request->session()->get('pertanyaan5');
+            $nilai6=$request->session()->get('pertanyaan6');
+            $nilai7=$request->session()->get('pertanyaan7');
+            $nilai8=$request->session()->get('pertanyaan8');
+            $nilai9=$request->session()->get('pertanyaan9');
+            $nilai10=$request->session()->get('pertanyaan10');
+            $nilai11=$request->session()->get('pertanyaan11');
+            $nilai12=$request->session()->get('pertanyaan12');
+            $nilai13=$request->session()->get('pertanyaan13');
+            $nilai14=$request->session()->get('pertanyaan14');
+            $nilai15=$request->session()->get('pertanyaan15');
+            $nilai16=$request->session()->get('pertanyaan16');
+            $nilai17=$request->session()->get('pertanyaan17');
+            $nilai18=$request->session()->get('pertanyaan18');
+            $nilai19=$request->session()->get('pertanyaan19');
+            $nilai20=$request->session()->get('pertanyaan20');
+            $nilai21=$request->session()->get('pertanyaan21');
+            $nilai22=$request->session()->get('pertanyaan22');
+            $nilai23=$request->session()->get('pertanyaan23');
+            $nilai24=$request->session()->get('pertanyaan24');
+            $nilai25=$request->session()->get('pertanyaan25');
+            $nilai26=$request->session()->get('pertanyaan26');
+            $nilai27=$request->session()->get('pertanyaan27');
+            $nilai28=$request->session()->get('pertanyaan28');
+            $nilai29=$request->session()->get('pertanyaan29');
+            $nilai30=$request->session()->get('pertanyaan30');
+            $nilai31=$request->session()->get('pertanyaan31');
+            $nilai32=$request->session()->get('pertanyaan32');
+            $nilai33=$request->session()->get('pertanyaan33');
+            $nilai34=$request->session()->get('pertanyaan34');
+            $nilai35=$request->session()->get('pertanyaan35');
+            $nilai36=$request->session()->get('pertanyaan36');
+            $nilai37=$request->session()->get('pertanyaan37');
+            $nilai38=$request->session()->get('pertanyaan38');
+            $nilai39=$request->session()->get('pertanyaan39');
+            $nilai40=$request->session()->get('pertanyaan40');
+            $nilai41=$request->session()->get('pertanyaan41');
+            $nilai42=$request->session()->get('pertanyaan42');
+            $nilai43=$request->session()->get('pertanyaan43');
+            $nilai44=$request->session()->get('pertanyaan44');
+            $nilai45=$request->session()->get('pertanyaan45');
+            $nilai46=$request->session()->get('pertanyaan46');
+            $nilai47=$request->session()->get('pertanyaan47');
+            $nilai48=$request->session()->get('pertanyaan48');
+            $nilai49=$request->session()->get('pertanyaan49');
+            $nilai50=$request->session()->get('pertanyaan50');
+            $nilai1s=$request->session()->get('pertanyaan1s');
+            $nilai2s=$request->session()->get('pertanyaan2s');
+            $nilai3s=$request->session()->get('pertanyaan3s');
+            $nilai4s=$request->session()->get('pertanyaan4s');
+            $nilai5s=$request->session()->get('pertanyaan5s');
+            $nilai6s=$request->session()->get('pertanyaan6s');
+            $nilai7s=$request->session()->get('pertanyaan7s');
+            $nilai8s=$request->session()->get('pertanyaan8s');
+            $nilai9s=$request->session()->get('pertanyaan9s');
+            $nilai10s=$request->session()->get('pertanyaan10s');
+            $nilai11s=$request->session()->get('pertanyaan11s');
+            $nilai12s=$request->session()->get('pertanyaan12s');
+            $nilai13s=$request->session()->get('pertanyaan13s');
+            $nilai14s=$request->session()->get('pertanyaan14s');
+            $nilai15s=$request->session()->get('pertanyaan15s');
+            $nilai16s=$request->session()->get('pertanyaan16s');
+            $nilai17s=$request->session()->get('pertanyaan17s');
+            $nilai18s=$request->session()->get('pertanyaan18s');
+            $nilai19s=$request->session()->get('pertanyaan19s');
+            $nilai20s=$request->session()->get('pertanyaan20s');
+            $nilai21s=$request->session()->get('pertanyaan21s');
+            $nilai22s=$request->session()->get('pertanyaan22s');
+            $nilai23s=$request->session()->get('pertanyaan23s');
+            $nilai24s=$request->session()->get('pertanyaan24s');
+            $nilai25s=$request->session()->get('pertanyaan25s');
+            $nilai26s=$request->session()->get('pertanyaan26s');
+            $nilai27s=$request->session()->get('pertanyaan27s');
+            $nilai28s=$request->session()->get('pertanyaan28s');
+            $nilai29s=$request->session()->get('pertanyaan29s');
+            $nilai30s=$request->session()->get('pertanyaan30s');
+            $nilai31s=$request->session()->get('pertanyaan31s');
+            $nilai32s=$request->session()->get('pertanyaan32s');
+            $nilai33s=$request->session()->get('pertanyaan33s');
+            $nilai34s=$request->session()->get('pertanyaan34s');
+            $nilai35s=$request->session()->get('pertanyaan35s');
+            $nilai36s=$request->session()->get('pertanyaan36s');
+            $nilai37s=$request->session()->get('pertanyaan37s');
+            $nilai38s=$request->session()->get('pertanyaan38s');
+            $nilai39s=$request->session()->get('pertanyaan39s');
+            $nilai40s=$request->session()->get('pertanyaan40s');
+            $nilai41s=$request->session()->get('pertanyaan41s');
+            $nilai42s=$request->session()->get('pertanyaan42s');
+            $nilai43s=$request->session()->get('pertanyaan43s');
+            $nilai44s=$request->session()->get('pertanyaan44s');
+            $nilai45s=$request->session()->get('pertanyaan45s');
+            $nilai46s=$request->session()->get('pertanyaan46s');
+            $nilai47s=$request->session()->get('pertanyaan47s');
+            $nilai48s=$request->session()->get('pertanyaan48s');
+            $nilai49s=$request->session()->get('pertanyaan49s');
+            $nilai50s=$request->session()->get('pertanyaan50s');
+             $hasils= $nilai1s + $nilai2s + $nilai3s + $nilai4s + $nilai5s + $nilai6s + $nilai7s + $nilai8s + $nilai9s + $nilai10s + $nilai11s + $nilai12s + $nilai13s + $nilai14s + $nilai15s + $nilai16s + $nilai17s +
+        $nilai18s + $nilai19s + $nilai20s + $nilai21s + $nilai22s + $nilai23s + $nilai24s + $nilai25s + $nilai26s + $nilai27s + $nilai28s + $nilai29s + $nilai30s + $nilai31s + $nilai32s + $nilai33s + $nilai34s + $nilai35s +
+        $nilai36s + $nilai37s + $nilai38s + $nilai39s + $nilai40s + $nilai41s + $nilai42s + $nilai43s + $nilai44s + $nilai45s + $nilai46 + $nilai47s + $nilai48s + $nilai49s + $nilai50s;
+        $hasil= $nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5 + $nilai6 + $nilai7 + $nilai8 + $nilai9 + $nilai10 + $nilai11 + $nilai12 + $nilai13 + $nilai14 + $nilai15 + $nilai16 + $nilai17 +
+        $nilai18 + $nilai19 + $nilai20 + $nilai21 + $nilai22 + $nilai23 + $nilai24 + $nilai25 + $nilai26 + $nilai27 + $nilai28 + $nilai29 + $nilai30 + $nilai31 + $nilai32 + $nilai33 + $nilai34 + $nilai35 +
+        $nilai36 + $nilai37 + $nilai38 + $nilai39 + $nilai40 + $nilai41 + $nilai42 + $nilai43 + $nilai44 + $nilai45 + $nilai46 + $nilai47 + $nilai48 + $nilai49 + $nilai50;
+        $salah= 0; 
+        $jawab = '';  
+        if ($hasils == $total_pages ){
+                $salah= $total_pages - $hasil;
+                $jawab .= 'jawaban benar:'.$hasil;
+                $jawab .= '<br>jawaban salah:'.$salah.'</br>';
+            }
+            return view('hasil',[
+                'hasil' => $hasil,
+                'jawab' => $jawab,
                 ]);
             }
             
