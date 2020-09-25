@@ -19,4 +19,4 @@ Route::get('/soal/{page}', 'App\Http\Controllers\GuzzleController@soal')->name('
 Route::post('/soal/{page}', 'App\Http\Controllers\GuzzleController@soal')->name('soal1');
 Route::post('/soal/{page}/{mapel}/{id}', 'App\Http\Controllers\GuzzleController@jawab')->name('jawab');
 Route::get('/jelas/{mapel}/{id}/{mame?}', 'App\Http\Controllers\GuzzleController@penjelasan')->name('jelas');
-Route::get('/hasil/{mapel}/{id}/{mame?}', 'App\Http\Controllers\GuzzleController@hasil')->name('hasil');
+Route::get('/hasil/{mapel}/{id}', 'App\Http\Controllers\GuzzleController@hasil')->name('hasil');

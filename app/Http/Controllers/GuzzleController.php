@@ -17,7 +17,106 @@ class GuzzleController extends Controller
         $tryOutArray = Http::get('http://ajaruji-demo-alpha.demo.klik.digital/demo/to')
         ->json()['data'];
         $page = 1;
-
+        $request->session()->forget('pertanyaan1');
+        $request->session()->forget('pertanyaan2');
+        $request->session()->forget('pertanyaan3');
+        $request->session()->forget('pertanyaan4');
+        $request->session()->forget('pertanyaan5');
+        $request->session()->forget('pertanyaan6');
+        $request->session()->forget('pertanyaan7');
+        $request->session()->forget('pertanyaan8');
+        $request->session()->forget('pertanyaan9');
+        $request->session()->forget('pertanyaan10');
+        $request->session()->forget('pertanyaan11');
+        $request->session()->forget('pertanyaan12');
+        $request->session()->forget('pertanyaan13');
+        $request->session()->forget('pertanyaan14');
+        $request->session()->forget('pertanyaan15');
+        $request->session()->forget('pertanyaan16');
+        $request->session()->forget('pertanyaan17');
+        $request->session()->forget('pertanyaan18');
+        $request->session()->forget('pertanyaan19');
+        $request->session()->forget('pertanyaan20');
+        $request->session()->forget('pertanyaan21');
+        $request->session()->forget('pertanyaan22');
+        $request->session()->forget('pertanyaan23');
+        $request->session()->forget('pertanyaan24');
+        $request->session()->forget('pertanyaan25');
+        $request->session()->forget('pertanyaan26');
+        $request->session()->forget('pertanyaan27');
+        $request->session()->forget('pertanyaan28');
+        $request->session()->forget('pertanyaan29');
+        $request->session()->forget('pertanyaan30');
+        $request->session()->forget('pertanyaan31');
+        $request->session()->forget('pertanyaan32');
+        $request->session()->forget('pertanyaan33');
+        $request->session()->forget('pertanyaan34');
+        $request->session()->forget('pertanyaan35');
+        $request->session()->forget('pertanyaan36');
+        $request->session()->forget('pertanyaan37');
+        $request->session()->forget('pertanyaan38');
+        $request->session()->forget('pertanyaan39');
+        $request->session()->forget('pertanyaan40');
+        $request->session()->forget('pertanyaan41');
+        $request->session()->forget('pertanyaan42');
+        $request->session()->forget('pertanyaan43');
+        $request->session()->forget('pertanyaan44');
+        $request->session()->forget('pertanyaan45');
+        $request->session()->forget('pertanyaan46');
+        $request->session()->forget('pertanyaan47');
+        $request->session()->forget('pertanyaan48');
+        $request->session()->forget('pertanyaan49');
+        $request->session()->forget('pertanyaan50');
+        $request->session()->forget('pertanyaan1s');
+        $request->session()->forget('pertanyaan2s');
+        $request->session()->forget('pertanyaan3s');
+        $request->session()->forget('pertanyaan4s');
+        $request->session()->forget('pertanyaan5s');
+        $request->session()->forget('pertanyaan6s');
+        $request->session()->forget('pertanyaan7s');
+        $request->session()->forget('pertanyaan8s');
+        $request->session()->forget('pertanyaan9s');
+        $request->session()->forget('pertanyaan10s');
+        $request->session()->forget('pertanyaan11s');
+        $request->session()->forget('pertanyaan12s');
+        $request->session()->forget('pertanyaan13s');
+        $request->session()->forget('pertanyaan14s');
+        $request->session()->forget('pertanyaan15s');
+        $request->session()->forget('pertanyaan16s');
+        $request->session()->forget('pertanyaan17s');
+        $request->session()->forget('pertanyaan18s');
+        $request->session()->forget('pertanyaan19s');
+        $request->session()->forget('pertanyaan20s');
+        $request->session()->forget('pertanyaan21s');
+        $request->session()->forget('pertanyaan22s');
+        $request->session()->forget('pertanyaan23s');
+        $request->session()->forget('pertanyaan24s');
+        $request->session()->forget('pertanyaan25s');
+        $request->session()->forget('pertanyaan26s');
+        $request->session()->forget('pertanyaan27s');
+        $request->session()->forget('pertanyaan28s');
+        $request->session()->forget('pertanyaan29s');
+        $request->session()->forget('pertanyaan30s');
+        $request->session()->forget('pertanyaan31s');
+        $request->session()->forget('pertanyaan32s');
+        $request->session()->forget('pertanyaan33s');
+        $request->session()->forget('pertanyaan34s');
+        $request->session()->forget('pertanyaan35s');
+        $request->session()->forget('pertanyaan36s');
+        $request->session()->forget('pertanyaan37s');
+        $request->session()->forget('pertanyaan38s');
+        $request->session()->forget('pertanyaan39s');
+        $request->session()->forget('pertanyaan40s');
+        $request->session()->forget('pertanyaan41s');
+        $request->session()->forget('pertanyaan42s');
+        $request->session()->forget('pertanyaan43s');
+        $request->session()->forget('pertanyaan44s');
+        $request->session()->forget('pertanyaan45s');
+        $request->session()->forget('pertanyaan46s');
+        $request->session()->forget('pertanyaan47s');
+        $request->session()->forget('pertanyaan48s');
+        $request->session()->forget('pertanyaan49s');
+        $request->session()->forget('pertanyaan50s');
         return view('mapel',[
         'mataPelajaran' => $mataPelajaran,
         'page'          => $page,
@@ -50,41 +149,6 @@ class GuzzleController extends Controller
         ->json()['data'];
         $data= $request->matapelajaran;
         $idsoal= $request->soal;
-        $nilai = $request->session()->get('jawaban');
-        $output ='<ul class="pagination">';
-        
-        if($page == 1){ // Jika page adalah page ke 1, maka disable link PREV
-            $output .= '<li class="disabled"><a href="#">First</a></li>';
-            $output .= '<li class="disabled"><a href="#">&laquo;</a></li>';
-            }else{ // Jika page bukan page ke 1
-              $link_prev = ($page > 1)? $page - 1 : 1;
-              $output .= '<li><a href="1?matapelajaran='.$data.'&soal='.$idsoal.'">First</a></li>';
-              $output .= '<li><a href="'.$link_prev.'?matapelajaran='.$data.'&soal='.$idsoal.'">&laquo;</a></li>';
-            }
-        $total_pages = count($soal1['soal']);
-        $jumlah_number = 5; // Tentukan jumlah link number sebelum dan sesudah page yang aktif
-        $start_number = ($page > $jumlah_number)? $page - $jumlah_number : 1; // Untuk awal link number
-        $end_number = ($page < ($total_pages - $jumlah_number))? $page + $jumlah_number : $total_pages;
-        if($request->page){
-            $page = $request->page;
-        }
-        else{
-            $page = 1;
-        }
-        for($i=$start_number; $i<=$end_number; $i++)  
-        {  
-            $link_active = ($page == $i)? ' class="active"' : '';
-             $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';  
-        } 
-        if($page == $total_pages){
-            $output .='<li class="disabled"><a href="#">&raquo;</a></li>';
-            $output .='<li class="disabled"><a href="#">Last</a></li>';
-        }else{ // Jika Bukan page terakhir
-            $link_next = ($page < $total_pages)? $page + 1 : $total_pages;
-            $output .='<li><a href="'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'">&raquo;</a></li>';
-            $output .='<li><a href="'.$total_pages.'?matapelajaran='.$data.'&soal='.$idsoal.'">Last</a></li>';
-        }
-        $output .= '</ul>';
         $nilai1=$request->session()->get('pertanyaan1');
         $nilai2=$request->session()->get('pertanyaan2');
         $nilai3=$request->session()->get('pertanyaan3');
@@ -185,6 +249,393 @@ class GuzzleController extends Controller
         $nilai48s=$request->session()->get('pertanyaan48s');
         $nilai49s=$request->session()->get('pertanyaan49s');
         $nilai50s=$request->session()->get('pertanyaan50s');
+        $output ='<ul class="pagination">';
+        if($page == 1){ // Jika page adalah page ke 1, maka disable link PREV
+            $output .= '<li class="disabled"><a href="#">First</a></li>';
+            $output .= '<li class="disabled"><a href="#">&laquo;</a></li>';
+            }else{ // Jika page bukan page ke 1
+              $link_prev = ($page > 1)? $page - 1 : 1;
+              $output .= '<li><a href="1?matapelajaran='.$data.'&soal='.$idsoal.'">First</a></li>';
+              $output .= '<li><a href="'.$link_prev.'?matapelajaran='.$data.'&soal='.$idsoal.'">&laquo;</a></li>';
+            }
+        $total_pages = count($soal1['soal']);
+        $jumlah_number = 5; // Tentukan jumlah link number sebelum dan sesudah page yang aktif
+        $start_number = ($page > $jumlah_number)? $page - $jumlah_number : 1; // Untuk awal link number
+        $end_number = ($page < ($total_pages - $jumlah_number))? $page + $jumlah_number : $total_pages;
+        if($request->page){
+            $page = $request->page;
+        }
+        else{
+            $page = 1;
+        }
+  
+        for($i=$start_number; $i<=$end_number; $i++)  
+        {  
+            $link_active = ($page == $i)? ' class="active"' : '';
+            switch($i){
+                case 1:
+                if($nilai1s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;                    
+                case 2:
+                    if($nilai2s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 3:
+                    if($nilai3s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 4:
+                    if($nilai4s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 5:
+                    if($nilai5s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 6:
+                    if($nilai6s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;                    
+                case 7:
+                    if($nilai7s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 8:
+                    if($nilai8s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;                                        
+                case 9:
+                    if($nilai9s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 10:
+                    if($nilai10s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 11:
+                    if($nilai11s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 12:
+                    if($nilai12s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 13:
+                    if($nilai13s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 14:
+                    if($nilai14s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 15:
+                    if($nilai15s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 16:
+                    if($nilai16s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 17:
+                    if($nilai17s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 18:
+                    if($nilai18s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 19:
+                    if($nilai19s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 20:
+                    if($nilai20s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 21:
+                    if($nilai21s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 22:
+                    if($nilai22s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 23:
+                    if($nilai23s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 24:
+                    if($nilai24s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 25:
+                    if($nilai25s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 26:
+                    if($nilai26s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 27:
+                    if($nilai27s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 28:
+                    if($nilai28s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 29:
+                    if($nilai29s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 30:
+                    if($nilai30s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 31:
+                    if($nilai31s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 32:
+                    if($nilai32s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 33:
+                    if($nilai33s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 34:
+                    if($nilai34s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 35:
+                    if($nilai35s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 36:
+                    if($nilai36s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 37:
+                    if($nilai37s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 38:
+                    if($nilai38s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 39:
+                    if($nilai39s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 40:
+                    if($nilai40s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 41:
+                    if($nilai41s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 42:
+                    if($nilai42s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 43:
+                    if($nilai43s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 44:
+                    if($nilai44s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 45:
+                    if($nilai45s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 46:
+                    if($nilai46s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 47:
+                    if($nilai47s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 48:
+                    if($nilai48s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 49:
+                    if($nilai49s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+                case 50:
+                    if($nilai50s==1){
+                        $output .= '<li class="disabled"><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }else{
+                        $output .= '<li'.$link_active.'><a name="page" type="submit" href="'.$i.'?matapelajaran='.$data.'&soal='.$idsoal.'" value ="'.$i.'">'.$i.'</a></li>';
+                    }
+                break;
+            }
+
+        } 
+        if($page == $total_pages){
+            $output .='<li class="disabled"><a href="#">&raquo;</a></li>';
+            $output .='<li class="disabled"><a href="#">Last</a></li>';
+            $lanjut ='<a href="1?matapelajaran='.$data.'&soal='.$idsoal.'">lanjut</a>'; 
+        }else{ // Jika Bukan page terakhir
+            $link_next = ($page < $total_pages)? $page + 1 : $total_pages;
+            $output .='<li><a href="'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'">&raquo;</a></li>';
+            $output .='<li><a href="'.$total_pages.'?matapelajaran='.$data.'&soal='.$idsoal.'">Last</a></li>';
+        }
+        $output .= '</ul>';
         $hasil= $nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5 + $nilai6 + $nilai7 + $nilai8 + $nilai9 + $nilai10 + $nilai11 + $nilai12 + $nilai13 + $nilai14 + $nilai15 + $nilai16 + $nilai17 +
         $nilai18 + $nilai19 + $nilai20 + $nilai21 + $nilai22 + $nilai23 + $nilai24 + $nilai25 + $nilai26 + $nilai27 + $nilai28 + $nilai29 + $nilai30 + $nilai31 + $nilai32 + $nilai33 + $nilai34 + $nilai35 +
         $nilai36 + $nilai37 + $nilai38 + $nilai39 + $nilai40 + $nilai41 + $nilai42 + $nilai43 + $nilai44 + $nilai45 + $nilai46 + $nilai47 + $nilai48 + $nilai49 + $nilai50;
@@ -192,13 +643,9 @@ class GuzzleController extends Controller
         $nilai18s + $nilai19s + $nilai20s + $nilai21s + $nilai22s + $nilai23s + $nilai24s + $nilai25s + $nilai26s + $nilai27s + $nilai28s + $nilai29s + $nilai30s + $nilai31s + $nilai32s + $nilai33s + $nilai34s + $nilai35s +
         $nilai36s + $nilai37s + $nilai38s + $nilai39s + $nilai40s + $nilai41s + $nilai42s + $nilai43s + $nilai44s + $nilai45s + $nilai46 + $nilai47s + $nilai48s + $nilai49s + $nilai50s;
         $link_next = ($page < $total_pages)? $page + 1 : $total_pages;
-        if($page==$total_pages){
-            $lanjut ='<a href="1?matapelajaran='.$data.'&soal='.$idsoal.'">lanjut</a>';
-            if( $hasils == $total_pages){
-                $lanjut ='<a href="'.route('hasil', [$data,$idsoal,$page]).'">hasil</a>';
-            }
-        }
-        else{
+        if($hasils == ($total_pages -1) ||$hasils == $total_pages){
+            $lanjut ='<a href="'.route('hasil', [$data,$idsoal]).'">hasil</a>';
+        }else{
             $lanjut ='<a href="'.$link_next.'?matapelajaran='.$data.'&soal='.$idsoal.'">lanjut</a>';
         }
 
@@ -765,12 +1212,10 @@ class GuzzleController extends Controller
                 'lanjut' => $lanjut,
                 ]);
             }
-        public function hasil(Request $request,$data,$idsoal,$page) {
+        public function hasil(Request $request,$data,$idsoal) {
             //dd($this->baseurl.'to?id_mapel='.$request->matapelajaran);
             //$res = Http::get('http://ajaruji-demo-alpha.demo.klik.digital/demo/to?id_mapel='.$request->matapelajaran);
             //$responsejson = json_decode($res->getBody());
-            $penjelasan = Http::get('ajaruji-demo-alpha.demo.klik.digital/demo/quiz?mapel='.$data.'&id='.$idsoal.'&no_urut='.$page)
-            ->json()['data']['soal'][0]['explain'];
             $soal1 = Http::get('ajaruji-demo-alpha.demo.klik.digital/demo/quiz?mapel='.$data.'&id='.$idsoal)
             ->json()['data'];
             $total_pages = count($soal1['soal']);
@@ -884,13 +1329,16 @@ class GuzzleController extends Controller
         $jawab = '';  
         if ($hasils == $total_pages ){
                 $salah= $total_pages - $hasil;
+                $angka = 100/$total_pages;
+                $score = $angka*$hasil;
                 $jawab .= 'jawaban benar:'.$hasil;
                 $jawab .= '<br>jawaban salah:'.$salah.'</br>';
+                $jawab .= '<br>Score anda:'.$score.'</br>';
             }
             return view('hasil',[
                 'hasil' => $hasil,
                 'jawab' => $jawab,
                 ]);
             }
-            
+
 }
